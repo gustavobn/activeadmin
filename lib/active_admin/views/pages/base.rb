@@ -56,7 +56,7 @@ module ActiveAdmin
         end
 
         def build_unsupported_browser
-          if active_admin_namespace.unsupported_browser_matcher =~ env["HTTP_USER_AGENT"]
+          if active_admin_namespace.unsupported_browser_matcher =~ user_agent
             insert_tag view_factory.unsupported_browser
           end
         end
@@ -141,6 +141,11 @@ module ActiveAdmin
           insert_tag view_factory.footer
         end
 
+        private
+
+        def user_agent
+          request.respond_to?(:get_header) ? request.get_header("HTTP_USER_AGENT") : env["HTTP_USER_AGENT"]
+        end
       end
     end
   end
