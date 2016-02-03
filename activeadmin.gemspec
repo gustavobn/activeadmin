@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bourbon'
   s.add_dependency 'coffee-rails'
   #s.add_dependency 'formtastic',          '~> 3.1.3'
-  s.add_dependency 'formtastic', github: 'jtomaszewski/formtastic', branch: 'patch-1'
+  #s.add_dependency 'formtastic', github: 'jtomaszewski/formtastic', branch: 'patch-1'
   s.add_dependency 'formtastic_i18n'
   s.add_dependency 'inherited_resources', '~> 1.6'
   s.add_dependency 'jquery-rails'
