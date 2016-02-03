@@ -1,3 +1,4 @@
+require 'active_admin/inputs'
 require 'active_admin/router'
 require 'active_admin/helpers/settings'
 
