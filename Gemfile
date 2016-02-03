@@ -19,7 +19,7 @@ end
 
 # Optional dependencies
 gem 'cancan'
-gem 'devise'
+gem 'devise', github: 'plataformatec/devise'
 gem 'draper'
 gem 'pundit'
 
