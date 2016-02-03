@@ -31,6 +31,7 @@ gem 'parallel_tests'
 gem 'pry'                                   # Easily debug from your console with `binding.pry`
 
 gem 'formtastic', github: 'jtomaszewski/formtastic', branch: 'patch-1'
+gem 'formtastic_i18n'
 
 group :development do
   # Debugging
