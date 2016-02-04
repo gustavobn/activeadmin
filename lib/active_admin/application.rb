@@ -26,6 +26,9 @@ module ActiveAdmin
     # include their paths in this load path to provide active_admin UIs
     setting :load_paths, [File.expand_path('app/admin', Rails.root)]
 
+    # Currnt engine if any
+    setting :engine, nil
+
     # The default number of resources to display on index pages
     inheritable_setting :default_per_page, 30
 
