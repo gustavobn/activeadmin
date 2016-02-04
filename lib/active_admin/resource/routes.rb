@@ -65,7 +65,7 @@ module ActiveAdmin
           send_route route_name, *route_instance_params(instance)
         end
 
-        def send_route(name, opts)
+        def send_route(name, opts=nil)
           if engine.present?
             engine.routes.url_helpers.public_send name, opts
           else
