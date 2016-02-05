@@ -27,7 +27,7 @@ module ActiveAdmin
     setting :load_paths, [File.expand_path('app/admin', Rails.root)]
 
     # Currnt engine if any
-    setting :engine, nil
+    inheritable_setting :engine, nil
 
     # The default number of resources to display on index pages
     inheritable_setting :default_per_page, 30
