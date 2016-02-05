@@ -26,7 +26,7 @@ module ActiveAdmin
         if options[:class]
           classes << options[:class]
         elsif title.present?
-          classes << "row-#{title.to_s.parameterize('_')}"
+          classes << "row-#{title.to_s.parameterize(separator: '_')}"
         end
         options[:class] = classes.join(' ')
 
@@ -102,7 +102,7 @@ module ActiveAdmin
       def single_record?
         @single_record ||= @collection.size == 1
       end
-      
+
       def is_array?(obj)
         obj.respond_to?(:each) && obj.respond_to?(:first) && !obj.is_a?(Hash)
       end
