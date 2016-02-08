@@ -115,7 +115,7 @@ module ActiveAdmin
         end
 
         def engine
-          resource.namespace.application.engine
+          resource.namespace.engine
         end
 
         def routes

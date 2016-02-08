@@ -70,7 +70,7 @@ module ActiveAdmin
 
     def controller_name
       base = [namespace.module_name, camelized_resource_name + "Controller"]
-      base.unshift(namespace.application.engine.parent.to_s) if namespace.application.engine.present?
+      base.unshift(namespace.engine.parent.to_s) if namespace.engine.present?
       base.compact.join('::')
     end
 
