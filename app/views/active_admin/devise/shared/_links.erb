@@ -1,3 +1,4 @@
+<% console %>
 <%- if controller_name != 'sessions' %>
   <% scope = Devise::Mapping.find_scope!(resource_name)
     engine = active_admin_engine(scope)
@@ -10,6 +11,14 @@
   <%= link_to t('active_admin.devise.links.sign_in'), url %><br />
 <% end -%>
 
+<% scope = Devise::Mapping.find_scope!(resource_name)
+  engine = active_admin_engine(scope)
+  if engine.nil?
+    url = send(:"new_#{scope}_registration_path")
+  else
+    url = engine.routes.url_helpers.send(:"new_#{scope}_registration_path")
+  end
+%>
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <%= link_to t('active_admin.devise.links.sign_up'), new_registration_path(resource_name) %><br />
 <% end -%>
