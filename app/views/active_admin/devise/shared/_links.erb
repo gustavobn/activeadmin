@@ -1,6 +1,6 @@
 <%- if controller_name != 'sessions' %>
   <% scope = Devise::Mapping.find_scope!(resource_name)
-    engine = active_admin_application.engine
+    engine = active_admin_engine(scope)
     if engine.nil?
       url = send(:"new_#{scope}_session_path")
     else

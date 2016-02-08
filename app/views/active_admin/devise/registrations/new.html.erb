@@ -2,7 +2,7 @@
   <h2><%= render_or_call_method_or_proc_on(self, active_admin_application.site_title) %> <%= title t('active_admin.devise.sign_up.title') %></h2>
 
   <% scope = Devise::Mapping.find_scope!(resource_name)
-    engine = active_admin_application.engine
+    engine = active_admin_engine(scope)
     if engine.nil?
       url = send(:"#{scope}_registration_path")
     else
