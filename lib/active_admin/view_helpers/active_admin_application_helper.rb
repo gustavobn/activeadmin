@@ -4,7 +4,6 @@ module ActiveAdmin
 
       # Returns the current Active Admin application instance
       def active_admin_application
-        byebug
         ActiveAdmin.application
       end
 
