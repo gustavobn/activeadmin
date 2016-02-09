@@ -1,27 +1,72 @@
+<%
+  scope = Devise::Mapping.find_scope!(resource_name)
+  engine = active_admin_engine(scope)
+%>
 <%- if controller_name != 'sessions' %>
-  <% scope = Devise::Mapping.find_scope!(resource_name) %>
-  <%= link_to t('active_admin.devise.links.sign_in'), send(:"new_#{scope}_session_path") %><br />
+  <% 
+    if engine.nil?
+      url = send(:"new_#{scope}_session_path")
+    else
+      url = engine.routes.url_helpers.send(:"new_#{scope}_session_path")
+    end
+  %>
+  <%= link_to t('active_admin.devise.links.sign_in'), url %><br />
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to t('active_admin.devise.links.sign_up'), new_registration_path(resource_name) %><br />
+  <%
+    if engine.nil?
+      url = send(:"new_#{scope}_registration_path")
+    else
+      url = engine.routes.url_helpers.send(:"new_#{scope}_registration_path")
+    end
+  %>
+  <%= link_to t('active_admin.devise.links.sign_up'), url %><br />
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-  <%= link_to t('active_admin.devise.links.forgot_your_password'), new_password_path(resource_name) %><br />
+  <%
+    if engine.nil?
+      url = send(:"new_#{scope}_password_path")
+    else
+      url = engine.routes.url_helpers.send(:"new_#{scope}_password_path")
+    end
+  %>
+  <%= link_to t('active_admin.devise.links.forgot_your_password'), url %><br />
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to t('active_admin.devise.links.resend_confirmation_instructions'), new_confirmation_path(resource_name) %><br />
+  <%
+    if engine.nil?
+      url = send(:"new_#{scope}_confirmation_path")
+    else
+      url = engine.routes.url_helpers.send(:"new_#{scope}_confirmation_path")
+    end
+  %>
+  <%= link_to t('active_admin.devise.links.resend_confirmation_instructions'), url %><br />
 <% end -%>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to t('active_admin.devise.links.resend_unlock_instructions'), new_unlock_path(resource_name) %><br />
+  <%
+    if engine.nil?
+      url = send(:"new_#{scope}_unlock_path")
+    else
+      url = engine.routes.url_helpers.send(:"new_#{scope}_unlock_path")
+    end
+  %>
+  <%= link_to t('active_admin.devise.links.resend_unlock_instructions'), url %><br />
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
+    <%
+      if engine.nil?
+        url = send(:"new_#{scope}_omniauth_authorize_path")
+      else
+        url = engine.routes.url_helpers.send(:"new_#{scope}_omniauth_authorize_path")
+      end
+    %>
     <%= link_to t('active_admin.devise.links.sign_in_with_omniauth_provider', provider: provider.to_s.titleize),
-          omniauth_authorize_path(resource_name, provider) %><br />
+          url %><br />
   <% end -%>
 <% end -%>

@@ -7,6 +7,9 @@ module ActiveAdmin
         ActiveAdmin.application
       end
 
+      def active_admin_engine(name)
+        active_admin_application.namespaces[name.to_sym].engine
+      end
     end
   end
 end

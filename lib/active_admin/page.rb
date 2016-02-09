@@ -64,8 +64,14 @@ module ActiveAdmin
       super.merge(id: resource_name)
     end
 
+    #def controller_name
+      #[namespace.module_name, camelized_resource_name + "Controller"].compact.join('::')
+    #end
+
     def controller_name
-      [namespace.module_name, camelized_resource_name + "Controller"].compact.join('::')
+      base = [namespace.module_name, camelized_resource_name + "Controller"]
+      base.unshift(namespace.engine.parent.to_s) if namespace.engine.present?
+      base.compact.join('::')
     end
 
     # Override from `ActiveAdmin::Resource::Controllers`

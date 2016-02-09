@@ -16,8 +16,7 @@ module ActiveAdmin
       def fields_for_params(params, options = {})
         namespace = options[:namespace]
         except = options[:except].is_a?(Array) ? options[:except] : [options[:except]]
-
-        params.flat_map do |k, v|
+        params.each do |k, v|
           next if namespace.nil? && %w(controller action commit utf8).include?(k.to_s)
           next if except.map(&:to_s).include?(k.to_s)
 

@@ -43,7 +43,7 @@ module ActiveAdmin
             suffix: (resource.route_uncountable? ? "index_path" : "path")
           )
 
-          routes.public_send route_name, *route_collection_params(params)
+          send_route route_name, *route_collection_params(params)
         end
 
         # @return [String] the path to this resource collection page
@@ -52,7 +52,7 @@ module ActiveAdmin
         def instance_path(instance)
           route_name = route_name(resource.resources_configuration[:self][:route_instance_name])
 
-          routes.public_send route_name, *route_instance_params(instance)
+          send_route route_name, *route_instance_params(instance)
         end
 
         # @return [String] the path to the edit page of this resource
@@ -62,7 +62,15 @@ module ActiveAdmin
           path = resource.resources_configuration[:self][:route_instance_name]
           route_name = route_name(path, action: :edit)
 
-          routes.public_send route_name, *route_instance_params(instance)
+          send_route route_name, *route_instance_params(instance)
+        end
+
+        def send_route(name, opts=nil)
+          if engine.present?
+            engine.routes.url_helpers.public_send name, opts
+          else
+            routes.public_send name, opts
+          end
         end
 
         private
@@ -104,6 +112,10 @@ module ActiveAdmin
 
         def belongs_to_name
           resource.belongs_to_config.target.resource_name.singular if nested?
+        end
+
+        def engine
+          resource.namespace.engine
         end
 
         def routes
