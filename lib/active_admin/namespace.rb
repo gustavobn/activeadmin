@@ -191,17 +191,17 @@ module ActiveAdmin
     end
 
     def unload_resources!
-      resources.each do |resource|
-        parent = (module_name || 'Object').constantize
-        name   = resource.controller_name.split('::').last
-        parent.send(:remove_const, name) if parent.const_defined? name
-
-        # Remove circular references
-        resource.controller.active_admin_config = nil
-        if resource.is_a?(Resource) && resource.dsl
-          resource.dsl.run_registration_block { @config = nil }
-        end
-      end
+      # resources.each do |resource|
+      #   parent = (module_name || 'Object').constantize
+      #   name   = resource.controller_name.split('::').last
+      #   parent.send(:remove_const, name) if parent.const_defined? name
+      #
+      #   # Remove circular references
+      #   resource.controller.active_admin_config = nil
+      #   if resource.is_a?(Resource) && resource.dsl
+      #     resource.dsl.run_registration_block { @config = nil }
+      #   end
+      # end
       @resources = ResourceCollection.new
     end
 
